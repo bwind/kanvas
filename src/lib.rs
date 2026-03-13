@@ -45,7 +45,7 @@ impl Chart {
     }
 
     #[must_use]
-    pub fn mark(mut self, mark: Mark) -> Self {
+    pub const fn mark(mut self, mark: Mark) -> Self {
         self.mark = Some(mark);
         self
     }
@@ -75,13 +75,13 @@ impl Chart {
     }
 
     #[must_use]
-    pub fn width(mut self, width: u32) -> Self {
+    pub const fn width(mut self, width: u32) -> Self {
         self.width = Some(width);
         self
     }
 
     #[must_use]
-    pub fn height(mut self, height: u32) -> Self {
+    pub const fn height(mut self, height: u32) -> Self {
         self.height = Some(height);
         self
     }
@@ -134,7 +134,7 @@ pub enum Mark {
 
 impl Mark {
     #[must_use]
-    pub fn as_vega_lite(self) -> &'static str {
+    pub const fn as_vega_lite(self) -> &'static str {
         match self {
             Self::Line => "line",
             Self::Bar => "bar",
@@ -183,19 +183,19 @@ impl ChartConfig {
     }
 
     #[must_use]
-    pub fn bar_corner_radius_end(mut self, radius: u32) -> Self {
+    pub const fn bar_corner_radius_end(mut self, radius: u32) -> Self {
         self.bar_corner_radius_end = radius;
         self
     }
 
     #[must_use]
-    pub fn bar_discrete_band_size(mut self, size: u32) -> Self {
+    pub const fn bar_discrete_band_size(mut self, size: u32) -> Self {
         self.bar_discrete_band_size = Some(size);
         self
     }
 
     #[must_use]
-    pub fn band_padding_outer(mut self, padding: f64) -> Self {
+    pub const fn band_padding_outer(mut self, padding: f64) -> Self {
         self.band_padding_outer = Some(padding);
         self
     }
@@ -395,7 +395,7 @@ pub enum FieldType {
 
 impl FieldType {
     #[must_use]
-    pub fn as_vega_lite(self) -> &'static str {
+    pub const fn as_vega_lite(self) -> &'static str {
         match self {
             Self::Temporal => "temporal",
             Self::Quantitative => "quantitative",
@@ -492,9 +492,10 @@ impl VegaLiteSpec {
         let path = path.as_ref();
 
         if let Some(parent) = path.parent()
-            && !parent.as_os_str().is_empty() {
-                fs::create_dir_all(parent)?;
-            }
+            && !parent.as_os_str().is_empty()
+        {
+            fs::create_dir_all(parent)?;
+        }
 
         fs::write(path, self.to_html())
     }

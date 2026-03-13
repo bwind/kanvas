@@ -3,6 +3,11 @@ name = "kanvas"
 version = "0.1.0"
 edition = "2024"
 description = "Declarative data visualization for Rust, compiled to Vega-Lite."
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/bwind/kanvas"
+homepage = "https://github.com/bwind/kanvas"
+documentation = "https://docs.rs/kanvas"
+readme = "README.md"
 
 [dependencies]
 serde = "1.0"
