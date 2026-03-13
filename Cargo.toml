@@ -1,0 +1,9 @@
+[package]
+name = "kanvas"
+version = "0.1.0"
+edition = "2024"
+description = "Declarative data visualization for Rust, compiled to Vega-Lite."
+
+[dependencies]
+serde = "1.0"
+serde_json = "1.0"
